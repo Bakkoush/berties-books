@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bertie's Books Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        h1 {
+            color: teal;
+        }
+        h2 {
+            color: #2b7a78;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bertie's Books Shop</h1>
+    <h2>Here are the books that we sell:</h2>
+    <ul id="bookList"></ul>
+
+    <script>
+        // Default books if none exist
+        const defaultBooks = [
+            { name: "Brighton Rock", price: "£20.25" },
+            { name: "Brave New World", price: "£25.00" },
+            { name: "Animal Farm", price: "£12.99" },
+            { name: "The 48 Laws of Power", price: "£9.99" },
+            { name: "The Sealed Nectar", price: "£15.99" }
+        ];
+
+        // Load saved books from localStorage or use defaults
+        let books = JSON.parse(localStorage.getItem('books')) || defaultBooks;
+
+        // Display books
+        const bookList = document.getElementById('bookList');
+        books.forEach(book => {
+            const li = document.createElement('li');
+            li.textContent = `${book.name}, ${book.price}`;
+            bookList.appendChild(li);
+        });
+    </script>
+</body>
+</html>
