@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search Results</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    h1 {
+      color: teal;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background: #f4f4f4;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Results for "<%= searchTerm %>"</h1>
+
+  <% if (results.length > 0) { %>
+    <ul>
+      <% results.forEach(book => { %>
+        <li><strong><%= book.name %></strong> — £<%= book.price %></li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No results found for "<%= searchTerm %>".</p>
+  <% } %>
+
+</body>
+</html>
