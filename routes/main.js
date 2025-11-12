@@ -1,29 +1,48 @@
 // Create a new router
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-// Handle our routes
-router.get('/',function(req, res, next){
-    res.render('index.ejs')
+// Home page
+router.get('/', (req, res) => {
+    res.render('index.ejs');
 });
 
-router.get('/about',function(req, res, next){
-    res.render('about.ejs')
+// About page
+router.get('/about', (req, res) => {
+    res.render('about.ejs');
 });
 
-router.post('/books/bookadded', function (req, res, next) {
-    // saving data in database
-    let sqlquery = "INSERT INTO books (name, price) VALUES (?,?)"
-    // execute sql query
-    let newrecord = [req.body.name, req.body.price]
+// ✅ Show all books
+router.get('/books/list', (req, res, next) => {
+    const sqlquery = "SELECT * FROM books";
+    db.query(sqlquery, (err, result) => {
+        if (err) {
+            next(err);
+        } else {
+            res.render('list.ejs', { books: result });
+        }
+    });
+});
+
+// ✅ Show add book form
+router.get('/books/addbook', (req, res) => {
+    res.render('addbook.ejs');
+});
+
+// ✅ Handle form submission (add book)
+router.post('/books/bookadded', (req, res, next) => {
+    const sqlquery = "INSERT INTO books (name, price) VALUES (?, ?)";
+    const newrecord = [req.body.bookname, req.body.price];
+
     db.query(sqlquery, newrecord, (err, result) => {
         if (err) {
-            next(err)
+            next(err);
+        } else {
+            // Redirect back to list after adding
+            res.redirect('/books/list');
         }
-        else
-            res.send(' This book is added to database, name: '+ req.body.name + ' price '+ req.body.price)
-    })
-}) 
+    });
+});
 
-// Export the router object so index.js can access it
-module.exports = router
+// Export the router object
+module.exports = router;

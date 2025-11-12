@@ -5,32 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bertie's Books: Add book</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-        }
-        h1 {
-            color: teal;
-        }
-        label {
-            display: block;
-            margin-top: 10px;
-        }
-        input[type="text"] {
-            margin-left: 5px;
-        }
-        button {
-            margin-top: 10px;
-        }
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: teal; }
+        label { display: block; margin-top: 10px; }
+        input[type="text"] { margin-left: 5px; }
+        button { margin-top: 10px; }
     </style>
 </head>
 <body>
     <h1>Bertie's Books: Add book</h1>
 
-    <form>
-        <label>Book name: <input type="text" name="bookname"></label>
-        <label>Price: <input type="text" name="price"></label>
+    <!-- Action points to your POST route -->
+    <form action="/books/bookadded" method="POST">
+        <label>Book name: <input type="text" name="bookname" required></label>
+        <label>Price: <input type="text" name="price" required></label>
         <button type="submit">Add Book</button>
     </form>
+
+    <a href="/books/list">Back to list</a>
 </body>
 </html>
