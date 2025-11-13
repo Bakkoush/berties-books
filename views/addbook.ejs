@@ -1,27 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bertie's Books: Add book</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        h1 { color: teal; }
-        label { display: block; margin-top: 10px; }
-        input[type="text"] { margin-left: 5px; }
-        button { margin-top: 10px; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bertie's Books: Add book</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    h1 { color: teal; }
+    label { display: block; margin-top: 10px; }
+    input[type="text"] { margin-left: 5px; }
+    button { margin-top: 10px; }
+    .message { 
+      margin-top: 20px; 
+      padding: 10px; 
+      background-color: #e8f8f5; 
+      border: 1px solid #b2dfdb; 
+      color: teal;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
-    <h1>Bertie's Books: Add book</h1>
+  <h1>Bertie's Books: Add book</h1>
 
-    <!-- Action points to your POST route -->
-    <form action="/books/bookadded" method="POST">
-        <label>Book name: <input type="text" name="bookname" required></label>
-        <label>Price: <input type="text" name="price" required></label>
-        <button type="submit">Add Book</button>
-    </form>
+  <% if (message) { %>
+    <div class="message"><%= message %></div>
+  <% } %>
 
-    <a href="/books/list">Back to list</a>
+  <form action="/books/bookadded" method="POST">
+  <label>Book name: <input type="text" name="bookname" required></label>
+  <label>Price: <input type="text" name="price" required></label>
+  <button type="submit">Add Book</button>
+</form>
+
+
 </body>
 </html>

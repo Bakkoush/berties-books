@@ -24,8 +24,27 @@ router.get('/search-result', function (req, res, next) {
 
     // addbooks route
 router.get('/addbook', function(req, res, next) {
-    res.render('addbook'); // renders addbook.ejs
+    res.render('addbook', { message: null }); // render with empty message
 });
+
+
+// POST route for adding a book
+router.post('/bookadded', (req, res, next) => {
+    const name = req.body.bookname;
+    const price = req.body.price;
+
+    const sqlquery = "INSERT INTO books (name, price) VALUES (?, ?)";
+    db.query(sqlquery, [name, price], (err, result) => {
+        if (err) {
+            next(err);
+        } else {
+            const message = `This book is added to database, name: ${name} price ${price}`;
+            // Re-render the addbook page with a success message
+            res.render('addbook', { message });
+        }
+    });
+});
+
 
     // search_result route
 router.get('/search_result', function (req, res, next) {
